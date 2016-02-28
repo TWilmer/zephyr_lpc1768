@@ -1,0 +1,8 @@
+
+if BOARD_LPCEXPRESSO_1769
+
+config BOARD
+        default "lpc_expresso_1769"
+
+
+endif # BOARD_LPCEXPRESSO_1769

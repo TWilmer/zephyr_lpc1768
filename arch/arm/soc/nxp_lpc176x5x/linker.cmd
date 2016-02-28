@@ -1,5 +1,7 @@
+/* linker.cmd - Linker command/script file */
+
 /*
- * Copyright (c) 2011-2015, Wind River Systems, Inc.
+ * Copyright (c) 2014 Wind River Systems, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +16,4 @@
  * limitations under the License.
  */
 
-#include <nanokernel.h>
-#include "board.h"
-#include <uart.h>
-#include <device.h>
-#include <init.h>
-
-
-
-DEVICE_INIT(pmux, PINMUX_NAME, &pinmux_initialize,
-			NULL, &board_pmux,
-			SECONDARY, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT);
+#include <arch/arm/cortex_m/scripts/linker.cmd>

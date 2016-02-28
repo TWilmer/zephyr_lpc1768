@@ -1,0 +1,214 @@
+# Kconfig - NXP  lpc176x5x family processor configuration options
+
+#
+# Copyright (c) 2016 Intel Corporation.
+# Copyright (c) 2014-2015 Wind River Systems, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+config SOC_NXP_LPC176X5X
+	bool
+	default n
+
+if SOC_NXP_LPC176X5X
+
+config SOC
+	default nxp_lpc176x5x
+
+# 32 priorities so 5 bits
+config NUM_IRQ_PRIO_BITS
+	int
+	default 5
+
+#
+# SAM3X8E has total 45 peripherals capable of
+# generating interrupts.
+#
+config NUM_IRQS
+	int
+	default 34
+
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+	int
+	default 96000000
+
+#
+# SRAM address depends on the processor.
+#
+# SAM3X8E has two SRAM banks:
+#   64K @ 0x20000000
+#   32K @ 0x20080000
+# The first 64K is mirrored at 0x20070000
+# to provide one continuous 96K block.
+#
+config SRAM_SIZE
+	default 32 
+
+config SRAM_BASE_ADDRESS	
+	default 0x10000000 
+
+#
+# NXP LPC 176X5X family has flash starting @ 0x00000000.
+#
+# LPC1769 has 512K of flash.
+#
+config FLASH_SIZE
+	default 512 
+
+config FLASH_BASE_ADDRESS
+	default 0x00000000
+
+config NXP_LPC176X5X_EXT_SLCK
+	bool "NXP LPC176X5X to use external crystal oscillator for slow clock"
+	default n
+	help
+	Says y if you want to use external 32 kHz crystal
+	oscillator to drive the slow clock. Note that this
+	adds a few seconds to boot time, as the crystal
+	needs to stabilize after power-up.
+
+	Says n if you do not need accraute and precise timers.
+	The slow clock will be driven by the internal fast
+	RC oscillator running at 32 kHz.
+
+config NXP_LPC176X5X_EXT_MAINCK
+	bool "NXP LPC176X5X to use external crystal oscillator for main clock"
+	default n
+	help
+	The main clock is being used to drive the PLL, and
+	thus driving the processor clock.
+
+	Says y if you want to use external crystal oscillator
+	to drive the main clock. Note that this adds about
+	a second to boot time, as the crystal needs to
+	stabilize after power-up.
+
+	The crystal used here can be from 1 MHz to 25 MHz. 
+
+	Says n here will use the internal fast RC oscillator
+	running at 4 MHz.
+
+config NXP_LPC176X5X_PLLA_MULA
+	hex
+	default 0x63
+	help
+	This is the multiplier (MULA) used by the PLL.
+	The processor clock is (MAINCK * (MULA + 1) / DIVA).
+
+	Board config file can override this settings
+	for a particular board.
+	
+	The PLL Frequency has to be between 275 MHz to 550 MHz.
+
+	Use this clock divided by 4 to have 100 MHz CPU clock
+
+config NXP_LPC176X5X_PLLA_DIVA
+	hex
+	default 0x04
+	help
+	This is the multiplier (MULA) used by the PLL.
+	The processor clock is (MAINCK * (MULA + 1) / DIVA).
+
+	Board config file can override this settings
+	for a particular board.
+
+	The PLL Frequency has to be between 275 MHz to 550 MHz.
+
+
+
+
+config NXP_LPC176X5X_PLL_USB_MULA
+	hex
+	default 0x2F
+	help
+	This is the multiplier (MULA) used by the PLL.
+	The processor clock is (MAINCK * (MULA + 1) / DIVA).
+
+	Board config file can override this settings
+	for a particular board.
+	
+	The PLL Frequency has to be between 275 MHz to 550 MHz.
+
+
+
+config NXP_LPC176X5X_PLL_USB_DIVA
+	hex
+	default 0x04
+	help
+	This is the multiplier (MULA) used by the PLL.
+	The processor clock is (MAINCK * (MULA + 1) / DIVA).
+
+	Board config file can override this settings
+	for a particular board.
+
+
+
+config KERNEL_INIT_PRIORITY_DEFAULT
+	default 40
+
+config KERNEL_INIT_PRIORITY_DEVICE
+	default 50
+
+config UART_CONSOLE_PRIORITY
+	default 60
+
+if UART_NXP_LPC176X5X
+
+config UART_NXP_LPC176X5X_BAUD_RATE
+	default 115200
+
+config UART_NXP_LPC176X5X_CLK_FREQ
+	default 100000000
+
+endif # UART_NXP_LPC176X5X
+
+if UART_CONSOLE
+
+config UART_CONSOLE_ON_DEV_NAME
+	default "UART_0"
+config UART_CONSOLE_IRQ
+	default 5
+config UART_CONSOLE_IRQ_PRI
+	default 3
+
+endif # UART_CONSOLE
+
+if GPIO_NXP_LPC176X5X
+
+config GPIO_NXP_LPC176X5X_PORTA
+	default y
+
+config GPIO_NXP_LPC176X5X_PORTB
+	default y
+
+config GPIO_NXP_LPC176X5X_PORTC
+	default y
+
+config GPIO_NXP_LPC176X5X_PORTD
+	default y
+
+endif # GPIO_NXP_LPC176X5X
+
+
+if UART_NXP_LPC1XXX
+
+config UART_NXP_LPC1XXX_BAUD_RATE
+	default 115200
+
+config UART_NXP_LPC1XXX_CLK_FREQ
+	default 100000000
+
+endif # UART_ATMEL_SAM3
+
+endif # SOC_NXP_LPC176X5X

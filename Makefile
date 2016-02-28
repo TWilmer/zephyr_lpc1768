@@ -1126,6 +1126,8 @@ flash: zephyr
 	@echo "Flashing $(BOARD_NAME)"
 	$(Q)$(CONFIG_SHELL) $(srctree)/scripts/support/$(FLASH_SCRIPT) flash
 
+debugserver: zephyr
+	$(Q)$(CONFIG_SHELL) $(srctree)/scripts/support/$(FLASH_SCRIPT) debugserver
 debug: zephyr
 	$(Q)$(CONFIG_SHELL) $(srctree)/scripts/support/$(FLASH_SCRIPT) debug
 else

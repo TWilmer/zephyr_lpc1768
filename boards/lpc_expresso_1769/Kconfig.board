@@ -1,0 +1,5 @@
+
+config  BOARD_LPCEXPRESSO_1769
+        bool "NXP Expresso 1769"
+        select SOC_NXP_LPC176X5X
+	depends on ARM

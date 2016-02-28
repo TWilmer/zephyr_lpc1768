@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2015, Wind River Systems, Inc.
+ * Copyright (c) 2012-2014 Wind River Systems, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-#include <nanokernel.h>
-#include "board.h"
-#include <uart.h>
-#include <device.h>
-#include <init.h>
+#include <zephyr.h>
 
+#if defined(CONFIG_STDOUT_CONSOLE)
+#include <stdio.h>
+#define PRINT           printf
+#else
+#include <misc/printk.h>
+#define PRINT           printk
+#endif
 
-
-DEVICE_INIT(pmux, PINMUX_NAME, &pinmux_initialize,
-			NULL, &board_pmux,
-			SECONDARY, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT);
+void main(void)
+{
+	PRINT("Hello World!\n");
+}

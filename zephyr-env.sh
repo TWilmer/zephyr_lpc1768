@@ -1,4 +1,3 @@
-
 if [ "X$(basename -- "$0")" == "Xzephyr-env.sh" ]; then
     echo "Source this file (do NOT execute it!) to set the Zephyr Kernel environment."
     exit
@@ -22,3 +21,4 @@ unset scripts_path
 zephyr_answer_file=~/zephyr-env_install.bash
 [ -f ${zephyr_answer_file} ] && . ${zephyr_answer_file}
 unset zephyr_answer_file
+[ -f ~/.zephyrrc ] && . ~/.zephyrrc

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2015, Wind River Systems, Inc.
+ * Copyright (c) 2015 Intel Corporation
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,9 @@
  * limitations under the License.
  */
 
-#include <nanokernel.h>
-#include "board.h"
-#include <uart.h>
-#include <device.h>
-#include <init.h>
+#ifndef __INC_BOARD_H
+#define __INC_BOARD_H
 
+#include <soc.h>
 
-
-DEVICE_INIT(pmux, PINMUX_NAME, &pinmux_initialize,
-			NULL, &board_pmux,
-			SECONDARY, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT);
+#endif /* __INC_BOARD_H */

@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/sh -x
+set -x
 
 # This script is loosly based on a script with same purpose provided
 # by RIOT-OS (https://github.com/RIOT-OS/RIOT)

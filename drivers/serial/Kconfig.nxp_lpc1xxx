@@ -1,0 +1,38 @@
+config UART_NXP_LPC1XXX
+	bool "NXP LPC1XXX family processor UART driver"
+	default n
+	select SERIAL_HAS_DRIVER
+	depends on SOC_NXP_LPC176X5X
+	help
+	This option enables the UART driver for NXP LPC1XXX
+	family processors. There are several UARTs For simplicty UART3
+	on port 0.25 and 0.26 is used
+	
+
+config UART_NXP_LPC1XXX_NAME
+	string "Device Name for NXP LPC1XXX UART"
+	default "UART_0"
+	depends on UART_NXP_LPC1XXX
+	help
+	  This is the device name for UART, and is included in the device
+	  struct.
+config UART0_NXP_NUMBER
+	int "UART Number to be used for Uart 0"
+	default 3
+	depends on UART_NXP_LPC1XXX
+	help
+	  Choose the UART for UART_0
+	  
+config UART_NXP_LPC1XXX_CLK_FREQ
+	int "NXP LPC1XXX  UART Clock Frequency"
+	default 0
+	depends on UART_NXP_LPC1XXX
+	help
+	  The clock frequency for UART port.
+
+config UART_NXP_LPC1XXX_BAUD_RATE
+	int "Atmel SAM3 UART Baud Rate"
+	default 0
+	depends on UART_ATMEL_SAM3
+	help
+	  The baud rate for UART port to be set to at boot.
